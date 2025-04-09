@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {Component} from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule, Sort} from '@angular/material/sort';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -9,11 +7,12 @@ import {TabelaComponent} from './components/tabela/tabela.component';
 import {PageEvent} from '@angular/material/paginator';
 import {NavbarComponent} from './components/navbar/navbar/navbar.component';
 import {Contato, MockDataService} from './utils/generate-data';
+import {ObjUtils} from './utils/obj-utils';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,
-    MatTableModule,
+  imports: [MatTableModule,
     MatSortModule,
     MatFormFieldModule,
     MatInputModule, TabelaComponent, NavbarComponent
@@ -31,14 +30,14 @@ export class AppComponent {
   ];
   dados: Contato[];
   total: number;
-  constructor(private mockService: MockDataService) {
+
+  form!: FormGroup;
+
+  constructor(private mockService: MockDataService,
+              private objUtils: ObjUtils) {
     this.dados = mockService.gerarDadosAleatorios();
     this.total = this.dados.length;
   }
-
-
-
-
 
   onPageChange(event: PageEvent) {
     console.log('📄 Página trocada:', event);
@@ -50,15 +49,16 @@ export class AppComponent {
     let {active, direction} = event;
     if (!direction) direction = 'asc';
     this.dados = this.dados.slice().sort((a, b) => {
-      const aValue = this.getNestedValue(a, active);
-      const bValue = this.getNestedValue(b, active);
+      const aValue = this.objUtils.getNestedValue(a, active);
+      const bValue = this.objUtils.getNestedValue(b, active);
 
       return direction === 'asc'
         ? aValue > bValue ? 1 : -1
         : aValue < bValue ? 1 : -1;
     });
   }
-  getNestedValue(obj: any, path: string): any {
-    return path.split('.').reduce((val, key) => val?.[key], obj);
+
+  search(value: any): void {
+    console.log(this.dados);
   }
 }
