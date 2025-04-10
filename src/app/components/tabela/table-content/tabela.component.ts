@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, EventEmitter, Input, input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
@@ -15,6 +25,7 @@ export interface ColumnConfig {
 
 @Component({
   selector: 'app-tabela',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     MatTableModule,
     MatSort,

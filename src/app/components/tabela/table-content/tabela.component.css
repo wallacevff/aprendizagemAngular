@@ -1,18 +1,28 @@
 .full-width-table {
   width: 100%;
-  overflow: visible;
+  overflow: visible !important;
 }
 
-th{
-  background-color: #016B85 !important; 
-  color: #ffffff; 
+.table-paginated th{
+  background-color: #016B85 !important;
+  color: #ffffff;
 }
+.table-paginated .mat-sort-header-arrow{
+  color: unset !important;
+}
+/*.table-paginated{*/
+/*  color: #ffffff !important;*/
+/*}*/
 
-td {
+/*.mat-sort-header-arrow {*/
+/*  color: #ffffff !important;*/
+/*}*/
+
+.table-paginated td {
   position: relative; /* para dropdown funcionar corretamente dentro da célula */
   overflow: visible;
 }
 
-.actions{
+.table-paginated .actions{
   /*width: 15%;*/
 }
