@@ -3,6 +3,7 @@ import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {NgForOf, NgIf} from '@angular/common';
+import {ObjUtils} from '../../utils/obj-utils';
 
 export interface ColumnConfig {
   key: string;
@@ -40,6 +41,8 @@ export class TabelaComponent implements AfterViewInit, OnInit {
   protected displayedColumns: string[] = [];
 
 
+  constructor(private objService: ObjUtils) { }
+
   protected get columnsKey() {
     return this.columns.map(col => col.key);
   }
@@ -57,9 +60,6 @@ export class TabelaComponent implements AfterViewInit, OnInit {
     this.dataSource.data = this.data;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-
-    console.log(this.displayedColumns);
     this.applySort();
   }
 
@@ -72,7 +72,8 @@ export class TabelaComponent implements AfterViewInit, OnInit {
   }
 
   protected getNestedValue(obj: any, path: string): void {
-    return path.split('.').reduce((value, key) => value?.[key], obj);
+    return this.objService.getNestedValue(obj, path);
   }
+
 
 }

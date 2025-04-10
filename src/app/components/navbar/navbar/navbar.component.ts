@@ -12,8 +12,8 @@ export type OnClickAction = (value: any) => void;
 })
 export class NavbarComponent implements AfterViewInit, OnInit{
   @Input() onClick!: OnClickAction;
-
-  searchForm: FormGroup;
+  @Output() onSearch = new EventEmitter<MouseEvent>();
+  public searchForm: FormGroup;
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
       search: new FormControl<string>(''),
@@ -33,4 +33,9 @@ export class NavbarComponent implements AfterViewInit, OnInit{
        this.onClick(value);
     }
   }
+
+  onSearchChange(mouseEvent: MouseEvent): void {
+    this.onSearch.emit(mouseEvent);
+  }
 }
+

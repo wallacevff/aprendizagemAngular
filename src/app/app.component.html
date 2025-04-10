@@ -1,7 +1,5 @@
-
-
 <navbar
-  [onClick]="search"
+  (onSearch)="searchEvent($event)"
 ></navbar>
 <app-tabela
   [columns]="cols"

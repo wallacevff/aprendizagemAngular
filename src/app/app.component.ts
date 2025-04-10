@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule, Sort} from '@angular/material/sort';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -31,6 +31,7 @@ export class AppComponent {
   dados: Contato[];
   total: number;
 
+  @ViewChild(NavbarComponent) navbar!: NavbarComponent;
   form!: FormGroup;
 
   constructor(private mockService: MockDataService,
@@ -42,6 +43,7 @@ export class AppComponent {
   onPageChange(event: PageEvent) {
     console.log('📄 Página trocada:', event);
     // Requisição ao backend...
+    console.log(this.dados);
   }
 
   onSortChange(event: Sort) {
@@ -59,6 +61,11 @@ export class AppComponent {
   }
 
   search(value: any): void {
-    console.log(this.dados);
+    console.log(value);
+  }
+
+  searchEvent(event: MouseEvent): void {
+    const values = this.navbar.searchForm.value as { search: string };
+    this.dados = this.dados.slice().filter(x => x.name.toLowerCase().includes(values.search.toLowerCase()));
   }
 }
