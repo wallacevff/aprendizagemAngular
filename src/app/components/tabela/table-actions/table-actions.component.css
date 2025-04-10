@@ -1,0 +1,13 @@
+.dropdown-menu {
+  position: absolute !important;
+  z-index: 1050; /* Bootstrap padrão para dropdowns */
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.1s ease-in-out;
+  transform-origin: top right;
+  transform: scale(1);
+}
+
+.dropdown-toggle::after {
+  display: none;
+}

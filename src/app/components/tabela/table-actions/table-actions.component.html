@@ -1,0 +1,18 @@
+<div class="dropdown">
+  <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+    <i class="bi bi-three-dots"></i>
+  </button>
+  <ul class="dropdown-menu">
+    <li *ngFor="let action of rowActions">
+      <button type="button" class="dropdown-item" (click)="action.action(row)">
+        <ng-container *ngIf="action.icon">
+          <i [class]="'bi me-2 ' + action.icon"></i>
+        </ng-container>
+        <ng-container *ngIf="action.iconUrl">
+          <img ngSrc="action.iconUrl" class="me-2" width="16px"  height="16px" alt="icon" />
+        </ng-container>
+        {{ action.label }}
+      </button>
+    </li>
+  </ul>
+</div>

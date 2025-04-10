@@ -3,12 +3,15 @@ import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {NgForOf, NgIf} from '@angular/common';
-import {ObjUtils} from '../../utils/obj-utils';
+import {ObjUtils} from '../../../utils/obj-utils';
+import {RowAction, TableActionsComponent} from '../table-actions/table-actions.component';
 
 export interface ColumnConfig {
   key: string;
   label: string;
 }
+
+
 
 @Component({
   selector: 'app-tabela',
@@ -19,6 +22,7 @@ export interface ColumnConfig {
     MatPaginator,
     NgForOf,
     NgIf,
+    TableActionsComponent,
   ],
   templateUrl: './tabela.component.html',
   styleUrl: './tabela.component.css'
@@ -29,9 +33,11 @@ export class TabelaComponent implements AfterViewInit, OnInit {
   @Input() data: any[] = [];
   @Input() total: number = 0;
   @Input() hasPagination: boolean = true;
+  @Input() rowActions: RowAction[] = [];
 
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() sortChange = new EventEmitter<Sort>();
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -55,12 +61,14 @@ export class TabelaComponent implements AfterViewInit, OnInit {
   }
   ngOnInit(): void {
     this.displayedColumns = this.columnsKey;
+    this.displayedColumns = [...this.columnsKey, 'actions'];
   }
   ngAfterViewInit(): void {
     this.dataSource.data = this.data;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.applySort();
+    console.log(this.rowActions);
   }
 
   ngOnChanges(): void {

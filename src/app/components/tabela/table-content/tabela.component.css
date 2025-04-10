@@ -1,0 +1,13 @@
+.full-width-table {
+  width: 100%;
+  overflow: visible;
+}
+
+
+td {
+  position: relative; /* para dropdown funcionar corretamente dentro da célula */
+  overflow: visible;
+}
+.actions{
+  /*width: 15%;*/
+}

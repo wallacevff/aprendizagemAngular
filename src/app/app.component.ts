@@ -3,12 +3,14 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule, Sort} from '@angular/material/sort';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {TabelaComponent} from './components/tabela/tabela.component';
+
 import {PageEvent} from '@angular/material/paginator';
 import {NavbarComponent} from './components/navbar/navbar/navbar.component';
 import {Contato, MockDataService} from './utils/generate-data';
 import {ObjUtils} from './utils/obj-utils';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
+import {TabelaComponent} from './components/tabela/table-content/tabela.component';
+import {RowAction} from './components/tabela/table-actions/table-actions.component';
 
 @Component({
   selector: 'app-root',
@@ -67,5 +69,27 @@ export class AppComponent {
   searchEvent(event: MouseEvent): void {
     const values = this.navbar.searchForm.value as { search: string };
     this.dados = this.dados.slice().filter(x => x.name.toLowerCase().includes(values.search.toLowerCase()));
+  }
+
+
+  rowActions: RowAction[] = [
+    {
+      icon: 'bi-pencil',
+      label: 'Editar',
+      action: (row: any) => this.editar(row)
+    },
+    {
+      icon: 'bi-trash',
+      label: 'Excluir',
+      action: (row: any) => this.excluir(row)
+    }
+  ];
+
+  editar(row: any) {
+    console.log('🖋 Editar:', row);
+  }
+
+  excluir(row: any) {
+    console.log('🗑 Excluir:', row);
   }
 }
