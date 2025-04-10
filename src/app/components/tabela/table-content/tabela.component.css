@@ -3,11 +3,16 @@
   overflow: visible;
 }
 
+th{
+  background-color: #016B85 !important; 
+  color: #ffffff; 
+}
 
 td {
   position: relative; /* para dropdown funcionar corretamente dentro da célula */
   overflow: visible;
 }
+
 .actions{
   /*width: 15%;*/
 }

@@ -82,6 +82,11 @@ export class AppComponent {
       icon: 'bi-trash',
       label: 'Excluir',
       action: (row: any) => this.excluir(row)
+    },
+    {
+      icon:  'bi-eye',
+      label: 'Visualizar',
+      action: (row: any) => this.visualizar(row)
     }
   ];
 
@@ -91,5 +96,9 @@ export class AppComponent {
 
   excluir(row: any) {
     console.log('🗑 Excluir:', row);
+  }
+
+  visualizar(row: any) {
+    console.log('Visualizar:', row)
   }
 }
