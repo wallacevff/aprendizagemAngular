@@ -25,7 +25,6 @@ import {RowAction} from './components/tabela/table-actions/table-actions.compone
 export class AppComponent {
   title = 'aprendizagemAngular';
 
-  pikaDura = (arg: any) => `${arg} - PNSC`;
 
   cols = [
     { key: 'name', label: 'Nome' },
