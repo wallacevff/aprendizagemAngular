@@ -19,6 +19,7 @@ import {RowAction, TableActionsComponent} from '../table-actions/table-actions.c
 export interface ColumnConfig {
   key: string;
   label: string;
+  function?: (arg: any) => string;
 }
 
 
@@ -90,9 +91,14 @@ export class TabelaComponent implements AfterViewInit, OnInit {
     this.pageChange.emit(pageEvent);
   }
 
-  protected getNestedValue(obj: any, path: string): void {
+  protected getNestedValue(obj: any, path: string): any {
     return this.objService.getNestedValue(obj, path);
   }
 
 
+  getValueSanitized(row: any, col: ColumnConfig): string {
+    if(!!col.function)
+      return col.function(this.getNestedValue(row, col.key));
+    return this.getNestedValue(row, col.key);
+  }
 }
