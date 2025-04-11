@@ -9,7 +9,7 @@ import {NavbarComponent} from './components/navbar/navbar/navbar.component';
 import {Contato, MockDataService} from './utils/generate-data';
 import {ObjUtils} from './utils/obj-utils';
 import {FormGroup} from '@angular/forms';
-import {TabelaComponent} from './components/tabela/table-content/tabela.component';
+import {ColumnConfig, TabelaComponent} from './components/tabela/table-content/tabela.component';
 import {RowAction} from './components/tabela/table-actions/table-actions.component';
 
 @Component({
@@ -25,11 +25,19 @@ import {RowAction} from './components/tabela/table-actions/table-actions.compone
 export class AppComponent {
   title = 'aprendizagemAngular';
 
+  estilo = (arg: any) => {
+    return {
+      color: 'white',
+      backgroundColor: arg.contato.idade > 20 ? 'green' : 'red',
+      padding: '10px',
+      borderRadius: '5px',
+    } as CSSStyleDeclaration  ;
+  };
 
-  cols = [
+  cols: ColumnConfig[] = [
     { key: 'name', label: 'Nome' },
     { key: 'contato.email', label: 'E-mail' },
-    { key: 'contato.idade', label: 'Idade' }
+    { key: 'contato.idade', label: 'Idade', styleFunction: this.estilo }
   ];
   dados: Contato[];
   total: number;

@@ -12,7 +12,7 @@ import {
 import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 import {ObjUtils} from '../../../utils/obj-utils';
 import {RowAction, TableActionsComponent} from '../table-actions/table-actions.component';
 
@@ -20,6 +20,7 @@ export interface ColumnConfig {
   key: string;
   label: string;
   function?: (arg: any) => string;
+  styleFunction? : (row: any) => { [key: string]: string } | CSSStyleDeclaration;
 }
 
 
@@ -35,6 +36,8 @@ export interface ColumnConfig {
     NgForOf,
     NgIf,
     TableActionsComponent,
+    NgClass,
+    NgStyle,
   ],
   templateUrl: './tabela.component.html',
   styleUrl: './tabela.component.css'
